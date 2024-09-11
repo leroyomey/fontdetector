@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Detector | Typography Unveiled</title>
+    <title>FontDetect | Typography Reimagined</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Playfair+Display:wght@700&family=Oswald:wght@500&family=Lora&family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f0f0f;
-            --text: #f0f0f0;
-            --accent: #ff3e00;
-            --secondary: #00c8ff;
+            --bg: #000000;
+            --text: #ffffff;
+            --accent: #ff00ff;
+            --secondary: #00ffff;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -19,6 +19,18 @@
             font-family: 'Roboto Mono', monospace;
             line-height: 1.6;
             overflow-x: hidden;
+            cursor: none;
+        }
+        #custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
         }
         .container { 
             max-width: 1400px; 
@@ -29,7 +41,6 @@
             position: fixed;
             width: 100%;
             z-index: 1000;
-            mix-blend-mode: difference;
         }
         nav {
             display: flex;
@@ -41,6 +52,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             color: var(--text);
+            mix-blend-mode: difference;
         }
         .hero {
             height: 100vh;
@@ -48,53 +60,25 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
         }
         .hero-content {
             text-align: center;
             z-index: 2;
+            mix-blend-mode: difference;
         }
         h1 {
-            font-size: 5vw;
+            font-size: 8vw;
             margin-bottom: 1rem;
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             position: relative;
+            display: inline-block;
         }
-        h1::before, h1::after {
-            content: attr(data-text);
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            opacity: 0.5;
-        }
-        h1::before {
-            left: 2px;
-            text-shadow: -1px 0 var(--accent);
-            animation: glitch-1 2s infinite linear alternate-reverse;
-        }
-        h1::after {
-            left: -2px;
-            text-shadow: 1px 0 var(--secondary);
-            animation: glitch-2 3s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-1 {
-            0% { clip-path: inset(20% 0 30% 0); }
-            20% { clip-path: inset(60% 0 1% 0); }
-            40% { clip-path: inset(25% 0 58% 0); }
-            60% { clip-path: inset(54% 0 7% 0); }
-            80% { clip-path: inset(3% 0 46% 0); }
-            100% { clip-path: inset(82% 0 13% 0); }
-        }
-        @keyframes glitch-2 {
-            0% { clip-path: inset(13% 0 69% 0); }
-            20% { clip-path: inset(47% 0 31% 0); }
-            40% { clip-path: inset(72% 0 11% 0); }
-            60% { clip-path: inset(15% 0 63% 0); }
-            80% { clip-path: inset(38% 0 42% 0); }
-            100% { clip-path: inset(57% 0 7% 0); }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
         }
         .cta-button {
             display: inline-block;
@@ -104,11 +88,21 @@
             text-decoration: none;
             font-weight: 700;
             transition: all 0.3s ease;
-            clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
+            position: relative;
+            overflow: hidden;
         }
-        .cta-button:hover {
-            transform: skew(-5deg);
-            box-shadow: 5px 5px 0 var(--secondary);
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s;
+        }
+        .cta-button:hover::before {
+            left: 100%;
         }
         .font-playground {
             position: absolute;
@@ -117,18 +111,13 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: 1;
         }
         .floating-char {
             position: absolute;
             font-size: 2rem;
-            opacity: 0.1;
+            opacity: 0.5;
             pointer-events: none;
-            animation: float 20s infinite linear;
-        }
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100vh) rotate(720deg); }
+            transition: all 0.3s ease;
         }
         .features {
             display: grid;
@@ -143,10 +132,22 @@
             padding: 2rem;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
-        .feature-card:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-5px);
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .feature-card:hover::before {
+            opacity: 0.1;
         }
         .feature-icon {
             font-size: 3rem;
@@ -174,15 +175,34 @@
             width: 100%;
             border-radius: 10px;
             box-shadow: 10px 10px 0 var(--accent);
+            transition: all 0.3s ease;
+        }
+        .demo-image:hover img {
+            transform: translate(-5px, -5px);
+            box-shadow: 15px 15px 0 var(--secondary);
         }
         footer {
             background: var(--accent);
             color: var(--bg);
             padding: 2rem 0;
             text-align: center;
-            clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%);
-            margin-top: -5rem;
-            padding-top: 7rem;
+            position: relative;
+            overflow: hidden;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,0,0,0.1) 10px,
+                rgba(0,0,0,0.1) 20px
+            );
         }
         @media (max-width: 768px) {
             .features { grid-template-columns: 1fr; }
@@ -192,6 +212,7 @@
     </style>
 </head>
 <body>
+    <div id="custom-cursor"></div>
     <header>
         <div class="container">
             <nav>
@@ -206,9 +227,9 @@
             <div class="font-playground" id="fontPlayground"></div>
             <div class="container">
                 <div class="hero-content">
-                    <h1 data-text="Unveil Typography">Unveil Typography</h1>
-                    <p>Discover the DNA of web design with unparalleled precision.</p>
-                    <a href="#" class="cta-button">Detect Fonts Now</a>
+                    <h1 id="glitchText">Typography Unveiled</h1>
+                    <p>Decode the visual language of the web</p>
+                    <a href="#" class="cta-button">Explore Fonts</a>
                 </div>
             </div>
         </section>
@@ -253,6 +274,14 @@
     </footer>
 
     <script>
+        // Custom cursor
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Floating characters
         const fontPlayground = document.getElementById('fontPlayground');
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
         const fonts = ['Roboto Mono', 'Playfair Display', 'Oswald', 'Lora', 'Montserrat'];
@@ -262,12 +291,60 @@
             char.classList.add('floating-char');
             char.textContent = chars[Math.floor(Math.random() * chars.length)];
             char.style.left = `${Math.random() * 100}%`;
-            char.style.animationDuration = `${20 + Math.random() * 20}s`;
-            char.style.animationDelay = `${Math.random() * 5}s`;
+            char.style.top = `${Math.random() * 100}%`;
             char.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
             fontPlayground.appendChild(char);
         }
 
+        // Magnetic effect on floating characters
+        document.addEventListener('mousemove', (e) => {
+            const chars = document.querySelectorAll('.floating-char');
+            chars.forEach(char => {
+                const rect = char.getBoundingClientRect();
+                const charX = rect.left + rect.width / 2;
+                const charY = rect.top + rect.height / 2;
+                const distX = e.clientX - charX;
+                const distY = e.clientY - charY;
+                const distance = Math.sqrt(distX * distX + distY * distY);
+                if (distance < 100) {
+                    const angle = Math.atan2(distY, distX);
+                    const force = (100 - distance) / 10;
+                    char.style.transform = `translate(${Math.cos(angle) * force}px, ${Math.sin(angle) * force}px)`;
+                } else {
+                    char.style.transform = 'translate(0, 0)';
+                }
+            });
+        });
+
+        // Glitch effect on hero text
+        const glitchText = document.getElementById('glitchText');
+        const glitchChars = '!<>-_\\/[]{}—=+*^?#________';
+
+        function glitch() {
+            let iterations = 0;
+            const originalText = glitchText.dataset.value || glitchText.innerText;
+            const interval = setInterval(() => {
+                glitchText.innerText = originalText
+                    .split('')
+                    .map((char, index) => {
+                        if (index < iterations) {
+                            return originalText[index];
+                        }
+                        return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                    })
+                    .join('');
+                
+                if (iterations >= originalText.length) {
+                    clearInterval(interval);
+                }
+                iterations += 1 / 3;
+            }, 30);
+        }
+
+        glitchText.addEventListener('mouseover', glitch);
+        glitchText.dataset.value = glitchText.innerText;
+
+        // Interactive feature cards
         const featureCards = document.querySelectorAll('.feature-card');
         featureCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
