@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Detector | Unveil Web Typography</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Font Detector | Typography Unveiled</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Playfair+Display:wght@700&family=Oswald:wght@500&family=Lora&family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --secondary: #10b981;
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --card: #ffffff;
+            --bg: #0f0f0f;
+            --text: #f0f0f0;
+            --accent: #ff3e00;
+            --secondary: #00c8ff;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Space Grotesk', sans-serif;
             background: var(--bg);
             color: var(--text);
+            font-family: 'Roboto Mono', monospace;
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 0 2rem;
+        }
         header {
             position: fixed;
             width: 100%;
             z-index: 1000;
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(10px);
+            mix-blend-mode: difference;
         }
         nav {
             display: flex;
@@ -35,85 +38,115 @@
             padding: 1rem 0;
         }
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text);
         }
         .hero {
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            opacity: 0.1;
-            z-index: -1;
         }
         .hero-content {
             text-align: center;
-            max-width: 800px;
+            z-index: 2;
         }
         h1 {
-            font-size: 4rem;
+            font-size: 5vw;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            position: relative;
+        }
+        h1::before, h1::after {
+            content: attr(data-text);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.5;
+        }
+        h1::before {
+            left: 2px;
+            text-shadow: -1px 0 var(--accent);
+            animation: glitch-1 2s infinite linear alternate-reverse;
+        }
+        h1::after {
+            left: -2px;
+            text-shadow: 1px 0 var(--secondary);
+            animation: glitch-2 3s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-1 {
+            0% { clip-path: inset(20% 0 30% 0); }
+            20% { clip-path: inset(60% 0 1% 0); }
+            40% { clip-path: inset(25% 0 58% 0); }
+            60% { clip-path: inset(54% 0 7% 0); }
+            80% { clip-path: inset(3% 0 46% 0); }
+            100% { clip-path: inset(82% 0 13% 0); }
+        }
+        @keyframes glitch-2 {
+            0% { clip-path: inset(13% 0 69% 0); }
+            20% { clip-path: inset(47% 0 31% 0); }
+            40% { clip-path: inset(72% 0 11% 0); }
+            60% { clip-path: inset(15% 0 63% 0); }
+            80% { clip-path: inset(38% 0 42% 0); }
+            100% { clip-path: inset(57% 0 7% 0); }
         }
         .cta-button {
             display: inline-block;
-            background: var(--primary);
-            color: white;
+            background: var(--accent);
+            color: var(--bg);
             padding: 0.8rem 2rem;
-            border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s ease;
-            border: 2px solid var(--primary);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
         }
         .cta-button:hover {
-            background: transparent;
-            color: var(--primary);
+            transform: skew(-5deg);
+            box-shadow: 5px 5px 0 var(--secondary);
+        }
+        .font-playground {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .floating-char {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            pointer-events: none;
+            animation: float 20s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(720deg); }
         }
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin: 5rem 0;
         }
         .feature-card {
-            background: var(--card);
-            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
             padding: 2rem;
-            text-align: center;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            cursor: pointer;
         }
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-        }
-        .feature-card:hover::before {
-            top: -100%;
-            left: -100%;
+        .feature-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
         }
         .feature-icon {
             font-size: 3rem;
@@ -122,8 +155,6 @@
         .demo-section {
             position: relative;
             padding: 5rem 0;
-            background: var(--primary);
-            color: white;
             overflow: hidden;
         }
         .demo-content {
@@ -142,36 +173,19 @@
         .demo-image img {
             width: 100%;
             border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .floating-fonts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .floating-font {
-            position: absolute;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.8);
-            animation: float 20s infinite linear;
-        }
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-1000%) rotate(720deg); opacity: 0; }
+            box-shadow: 10px 10px 0 var(--accent);
         }
         footer {
-            background: var(--text);
+            background: var(--accent);
             color: var(--bg);
             padding: 2rem 0;
             text-align: center;
+            clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%);
+            margin-top: -5rem;
+            padding-top: 7rem;
         }
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
+            .features { grid-template-columns: 1fr; }
             .demo-content { flex-direction: column; }
             .demo-text, .demo-image { padding: 1rem 0; }
         }
@@ -181,7 +195,7 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">Font Detector</div>
+                <div class="logo">FontDetect</div>
                 <a href="#" class="cta-button">Get Extension</a>
             </nav>
         </div>
@@ -189,11 +203,12 @@
 
     <main>
         <section class="hero">
+            <div class="font-playground" id="fontPlayground"></div>
             <div class="container">
                 <div class="hero-content">
-                    <h1>Unveil Web Typography</h1>
-                    <p>Discover and analyze fonts across the web with unparalleled precision.</p>
-                    <a href="#" class="cta-button">Start Your Font Journey</a>
+                    <h1 data-text="Unveil Typography">Unveil Typography</h1>
+                    <p>Discover the DNA of web design with unparalleled precision.</p>
+                    <a href="#" class="cta-button">Detect Fonts Now</a>
                 </div>
             </div>
         </section>
@@ -202,18 +217,18 @@
             <div class="container">
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h3>Instant Detection</h3>
-                    <p>Identify fonts on any webpage in milliseconds.</p>
+                    <h3>Instant Recognition</h3>
+                    <p>Identify fonts in milliseconds with our AI-powered engine.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🎨</div>
-                    <h3>Smart Search</h3>
-                    <p>Find and download detected fonts effortlessly.</p>
+                    <h3>Style Analysis</h3>
+                    <p>Get detailed insights on font styles, weights, and pairings.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔍</div>
-                    <h3>Deep Analysis</h3>
-                    <p>Get detailed insights on font usage and pairings.</p>
+                    <h3>Deep Inspection</h3>
+                    <p>Explore font metrics, licensing info, and usage statistics.</p>
                 </div>
             </div>
         </section>
@@ -221,12 +236,11 @@
         <section class="demo-section">
             <div class="container demo-content">
                 <div class="demo-text">
-                    <h2>See Font Detector in Action</h2>
-                    <p>Experience the simplicity and power of our extension. Hover over any text to instantly reveal its font details.</p>
+                    <h2>Experience the Magic</h2>
+                    <p>See Font Detector in action. Hover over any text to reveal its typographic secrets.</p>
                 </div>
                 <div class="demo-image">
                     <img src="demo-screenshot.jpg" alt="Font Detector Demo">
-                    <div class="floating-fonts" id="floatingFonts"></div>
                 </div>
             </div>
         </section>
@@ -234,41 +248,35 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Font Detector. Empowering typographic exploration worldwide.</p>
+            <p>&copy; 2024 FontDetect. Decoding the web, one character at a time.</p>
         </div>
     </footer>
 
     <script>
-        // Animate floating fonts
-        const floatingFonts = document.getElementById('floatingFonts');
-        const fontNames = ['Arial', 'Helvetica', 'Times New Roman', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS', 'Arial Black', 'Impact'];
+        const fontPlayground = document.getElementById('fontPlayground');
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+        const fonts = ['Roboto Mono', 'Playfair Display', 'Oswald', 'Lora', 'Montserrat'];
 
-        for (let i = 0; i < 20; i++) {
-            const font = document.createElement('div');
-            font.classList.add('floating-font');
-            font.textContent = fontNames[Math.floor(Math.random() * fontNames.length)];
-            font.style.left = `${Math.random() * 100}%`;
-            font.style.top = `${Math.random() * 100}%`;
-            font.style.animationDuration = `${15 + Math.random() * 15}s`;
-            font.style.animationDelay = `${Math.random() * 5}s`;
-            floatingFonts.appendChild(font);
+        for (let i = 0; i < 100; i++) {
+            const char = document.createElement('div');
+            char.classList.add('floating-char');
+            char.textContent = chars[Math.floor(Math.random() * chars.length)];
+            char.style.left = `${Math.random() * 100}%`;
+            char.style.animationDuration = `${20 + Math.random() * 20}s`;
+            char.style.animationDelay = `${Math.random() * 5}s`;
+            char.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+            fontPlayground.appendChild(char);
         }
 
-        // Animate features on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
             });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.style.opacity = 0;
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(card);
         });
     </script>
 </body>
