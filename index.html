@@ -3,40 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Detector Extension v9</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <meta name="description" content="Discover and analyze fonts across the web with Font Detector Extension">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Font Detector | Unveil Web Typography</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #6366f1;
-            --secondary-color: #10b981;
-            --accent-color: #f59e0b;
-            --background-color: #f8fafc;
-            --text-color: #1e293b;
-            --card-bg: #ffffff;
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --primary: #6366f1;
+            --secondary: #10b981;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card: #ffffff;
         }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: var(--text-color);
-            background-color: var(--background-color);
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
         header {
-            background-color: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
         }
         nav {
             display: flex;
@@ -47,174 +37,143 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--primary);
         }
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #f6f8fc, #e2e8f0);
             position: relative;
             overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            z-index: -1;
         }
         .hero-content {
             text-align: center;
-            z-index: 1;
+            max-width: 800px;
         }
-        h1 { 
-            font-size: 4rem; 
-            font-weight: 700;
+        h1 {
+            font-size: 4rem;
             margin-bottom: 1rem;
-            line-height: 1.2;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent;
             color: transparent;
-        }
-        h2 { 
-            color: var(--text-color); 
-            margin-top: 4rem; 
-            font-weight: 600;
-            font-size: 2.5rem;
         }
         .cta-button {
             display: inline-block;
-            background-color: var(--primary-color);
-            color: #ffffff;
-            padding: 14px 28px;
-            text-decoration: none;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
             border-radius: 50px;
+            text-decoration: none;
             font-weight: 600;
-            margin-top: 1.5rem;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
+            border: 2px solid var(--primary);
         }
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .cta-button::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%) scale(0);
-            border-radius: 50%;
-            transition: transform 0.6s ease-out;
-        }
-        .cta-button:hover::after {
-            transform: translate(-50%, -50%) scale(1);
+            background: transparent;
+            color: var(--primary);
         }
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 5rem 0;
         }
         .feature-card {
-            background-color: var(--card-bg);
-            padding: 2.5rem;
+            background: var(--card);
             border-radius: 20px;
-            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            text-align: center;
             transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
             position: relative;
             overflow: hidden;
         }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+        .feature-card:hover::before {
+            top: -100%;
+            left: -100%;
         }
         .feature-icon {
             font-size: 3rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
+            margin-bottom: 1rem;
         }
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1);
-        }
-        .testimonials {
-            margin-top: 5rem;
-        }
-        .testimonial-card {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
+        .demo-section {
             position: relative;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-        }
-        .testimonial-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12);
-        }
-        .testimonial-card::before {
-            content: '"';
-            font-size: 4rem;
-            color: var(--primary-color);
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            opacity: 0.2;
-        }
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--accent-color);
-        }
-        .faq {
-            margin-top: 5rem;
-        }
-        .faq-item {
-            margin-bottom: 1.5rem;
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: var(--card-shadow);
+            padding: 5rem 0;
+            background: var(--primary);
+            color: white;
             overflow: hidden;
         }
-        .faq-question {
-            font-weight: 600;
-            color: var(--text-color);
-            cursor: pointer;
-            padding: 1rem;
+        .demo-content {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s ease;
+            justify-content: space-between;
         }
-        .faq-question:hover {
-            background-color: rgba(99, 102, 241, 0.1);
+        .demo-text {
+            flex: 1;
+            padding-right: 2rem;
         }
-        .faq-question::after {
-            content: '+';
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
+        .demo-image {
+            flex: 1;
+            position: relative;
         }
-        .faq-question.active::after {
-            transform: rotate(45deg);
+        .demo-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .faq-answer {
-            padding: 0 1rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
+        .floating-fonts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
-        .faq-answer.active {
-            max-height: 1000px;
-            padding: 1rem;
+        .floating-font {
+            position: absolute;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            animation: float 20s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-1000%) rotate(720deg); opacity: 0; }
+        }
+        footer {
+            background: var(--text);
+            color: var(--bg);
+            padding: 2rem 0;
+            text-align: center;
         }
         @media (max-width: 768px) {
             h1 { font-size: 3rem; }
-            .feature-card { align-items: center; text-align: center; }
+            .demo-content { flex-direction: column; }
+            .demo-text, .demo-image { padding: 1rem 0; }
         }
     </style>
 </head>
@@ -223,96 +182,79 @@
         <div class="container">
             <nav>
                 <div class="logo">Font Detector</div>
-                <a href="#" class="cta-button" aria-label="Get Extension">Get Extension</a>
+                <a href="#" class="cta-button">Get Extension</a>
             </nav>
         </div>
     </header>
-    
+
     <main>
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
                     <h1>Unveil Web Typography</h1>
                     <p>Discover and analyze fonts across the web with unparalleled precision.</p>
-                    <a href="#" class="cta-button" aria-label="Start Your Font Journey">Start Your Font Journey</a>
+                    <a href="#" class="cta-button">Start Your Font Journey</a>
                 </div>
             </div>
         </section>
-        
-        <div class="container">
-            <section class="features">
+
+        <section class="features">
+            <div class="container">
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Instant Detection</h3>
-                    <p>Identify fonts on any webpage in milliseconds, including external sources.</p>
+                    <p>Identify fonts on any webpage in milliseconds.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🎨</div>
-                    <h3>Adaptive Themes</h3>
-                    <p>Seamlessly switch between dark and light modes for optimal viewing comfort.</p>
+                    <h3>Smart Search</h3>
+                    <p>Find and download detected fonts effortlessly.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔍</div>
-                    <h3>Smart Search</h3>
-                    <p>Find and download detected fonts with our intelligent search algorithm.</p>
+                    <h3>Deep Analysis</h3>
+                    <p>Get detailed insights on font usage and pairings.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📋</div>
-                    <h3>Instant Copy</h3>
-                    <p>Copy font details with a single click for seamless workflow integration.</p>
+            </div>
+        </section>
+
+        <section class="demo-section">
+            <div class="container demo-content">
+                <div class="demo-text">
+                    <h2>See Font Detector in Action</h2>
+                    <p>Experience the simplicity and power of our extension. Hover over any text to instantly reveal its font details.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Advanced Analytics</h3>
-                    <p>Gain insights into font usage patterns across websites.</p>
+                <div class="demo-image">
+                    <img src="demo-screenshot.jpg" alt="Font Detector Demo">
+                    <div class="floating-fonts" id="floatingFonts"></div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>CORS Guardian</h3>
-                    <p>Navigate cross-origin challenges with our smart detection system.</p>
-                </div>
-            </section>
-            
-            <section class="testimonials">
-                <h2>What Our Users Say</h2>
-                <div class="testimonial-card">
-                    <p>"Font Detector has revolutionized my design workflow. It's an indispensable tool for any web designer!"</p>
-                    <p class="testimonial-author">- Sarah J., UX Designer</p>
-                </div>
-                <div class="testimonial-card">
-                    <p>"The accuracy and speed of Font Detector are unmatched. It's become my go-to for font identification."</p>
-                    <p class="testimonial-author">- Mark T., Web Developer</p>
-                </div>
-            </section>
-            
-            <section class="faq">
-                <h2>Frequently Asked Questions</h2>
-                <div class="faq-item">
-                    <div class="faq-question">How does Font Detector work?</div>
-                    <div class="faq-answer">Font Detector uses advanced algorithms to analyze the CSS and font files of a webpage, identifying both local and web fonts accurately.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Is Font Detector compatible with all browsers?</div>
-                    <div class="faq-answer">Yes, Font Detector is compatible with all major browsers including Chrome, Firefox, Safari, and Edge.</div>
-                </div>
-                <!-- Add more FAQ items as needed -->
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
-    
+
     <footer>
         <div class="container">
-            <p>&copy; 2024 Font Detector Extension. Empowering typographic exploration worldwide.</p>
-            <nav>
-                <a href="#privacy-policy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-            </nav>
+            <p>&copy; 2024 Font Detector. Empowering typographic exploration worldwide.</p>
         </div>
     </footer>
 
     <script>
+        // Animate floating fonts
+        const floatingFonts = document.getElementById('floatingFonts');
+        const fontNames = ['Arial', 'Helvetica', 'Times New Roman', 'Courier', 'Verdana', 'Georgia', 'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS', 'Arial Black', 'Impact'];
+
+        for (let i = 0; i < 20; i++) {
+            const font = document.createElement('div');
+            font.classList.add('floating-font');
+            font.textContent = fontNames[Math.floor(Math.random() * fontNames.length)];
+            font.style.left = `${Math.random() * 100}%`;
+            font.style.top = `${Math.random() * 100}%`;
+            font.style.animationDuration = `${15 + Math.random() * 15}s`;
+            font.style.animationDelay = `${Math.random() * 5}s`;
+            floatingFonts.appendChild(font);
+        }
+
         // Animate features on scroll
-        const featureCards = document.querySelectorAll('.feature-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -322,31 +264,11 @@
             });
         }, { threshold: 0.1 });
 
-        featureCards.forEach(card => {
+        document.querySelectorAll('.feature-card').forEach(card => {
             card.style.opacity = 0;
             card.style.transform = 'translateY(20px)';
             card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(card);
-        });
-
-        // FAQ toggle functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const isActive = question.classList.contains('active');
-                
-                // Close all other questions
-                document.querySelectorAll('.faq-question').forEach(q => {
-                    q.classList.remove('active');
-                    q.nextElementSibling.classList.remove('active');
-                });
-
-                // Toggle current question
-                if (!isActive) {
-                    question.classList.add('active');
-                    answer.classList.add('active');
-                }
-            });
         });
     </script>
 </body>
