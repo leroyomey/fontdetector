@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Detector Extension</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Font Detector Extension v3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #6200ee;
-            --secondary-color: #03dac6;
-            --background-color: #f5f5f5;
-            --text-color: #333;
-            --light-text: #666;
+            --primary-color: #6366f1;
+            --secondary-color: #10b981;
+            --background-color: #f3f4f6;
+            --text-color: #1f2937;
+            --light-text: #6b7280;
+            --card-bg: #ffffff;
         }
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Outfit', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -22,12 +23,12 @@
             background-color: var(--background-color);
         }
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         header {
-            background-color: white;
+            background-color: var(--card-bg);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
@@ -37,7 +38,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1rem 0;
         }
         .logo {
             font-size: 1.5rem;
@@ -45,127 +46,187 @@
             color: var(--primary-color);
         }
         .hero {
-            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            text-align: center;
-            padding: 4rem 2rem;
+            border-radius: 0 0 50px 50px;
         }
-        h1 { margin: 0; font-size: 2.5rem; font-weight: 700; }
-        h2 { color: var(--primary-color); margin-top: 2rem; font-weight: 600; }
-        .feature-list { padding-left: 20px; }
-        .feature-list li { margin-bottom: 0.5rem; }
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+        }
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        h1 { 
+            font-size: 3.5rem; 
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        h2 { 
+            color: var(--primary-color); 
+            margin-top: 4rem; 
+            font-weight: 600;
+            font-size: 2.5rem;
+        }
         .cta-button {
             display: inline-block;
             background-color: var(--secondary-color);
-            color: var(--text-color);
-            padding: 12px 24px;
+            color: white;
+            padding: 14px 28px;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: 50px;
             font-weight: 600;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
         .cta-button:hover {
+            background-color: #0ea271;
             transform: translateY(-3px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 5rem;
         }
         .feature-card {
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
         }
         .privacy-policy {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-top: 3rem;
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 5rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         footer { 
             text-align: center;
-            padding: 2rem;
-            background-color: var(--primary-color);
+            padding: 3rem;
+            background-color: var(--text-color);
             color: white;
-            margin-top: 3rem;
+            margin-top: 5rem;
+            border-radius: 50px 50px 0 0;
+        }
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 4rem 0;
+            }
+            .hero-content, .hero-image {
+                padding: 0;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .feature-card {
+                align-items: center;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="logo">Font Detector</div>
-            <a href="#" class="cta-button">Download Now</a>
-        </nav>
+        <div class="container">
+            <nav>
+                <div class="logo">Font Detector</div>
+                <a href="#" class="cta-button">Download Now</a>
+            </nav>
+        </div>
     </header>
     
-    <section class="hero">
-        <h1>Discover Fonts with Ease</h1>
-        <p>Identify and explore web fonts instantly with our powerful browser extension.</p>
-    </section>
-    
-    <div class="container">
-        <main>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Reveal the Web's Typography Secrets</h1>
+                    <p>Font Detector empowers designers and developers to instantly identify and explore fonts across the web.</p>
+                    <a href="#" class="cta-button">Start Detecting Fonts</a>
+                </div>
+            </div>
+        </section>
+        
+        <div class="container">
             <section class="features">
                 <div class="feature-card">
-                    <h3>Instant Detection</h3>
-                    <p>Quickly identify fonts used on any webpage with a single click.</p>
+                    <div class="feature-icon">🚀</div>
+                    <h3>Lightning-Fast Detection</h3>
+                    <p>Identify fonts on any webpage in milliseconds, including those from external sources.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Intuitive Interface</h3>
-                    <p>Clean design with both dark and light themes for comfortable use.</p>
+                    <div class="feature-icon">🌗</div>
+                    <h3>Sleek UI with Themes</h3>
+                    <p>Enjoy our intuitive interface with customizable dark and light themes for any environment.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Search & Download</h3>
-                    <p>Easily search for and download detected fonts with one click.</p>
+                    <div class="feature-icon">🔍</div>
+                    <h3>Smart Search & Download</h3>
+                    <p>Find and download detected fonts effortlessly with our intelligent search feature.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Copy to Clipboard</h3>
-                    <p>Quickly copy font names for use in your projects.</p>
+                    <div class="feature-icon">📋</div>
+                    <h3>Quick Copy Function</h3>
+                    <p>Copy font names instantly for seamless integration into your design workflow.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Pagination</h3>
-                    <p>Efficiently navigate through large font lists with built-in pagination.</p>
+                    <div class="feature-icon">📚</div>
+                    <h3>Advanced Pagination</h3>
+                    <p>Navigate extensive font lists with ease using our smart pagination system.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>CORS Warnings</h3>
-                    <p>Get notified about CORS restrictions for comprehensive detection.</p>
+                    <div class="feature-icon">🛡️</div>
+                    <h3>CORS Insight</h3>
+                    <p>Stay informed about cross-origin restrictions for thorough font analysis.</p>
                 </div>
             </section>
             
             <section class="privacy-policy">
-                <h2>Privacy Policy</h2>
-                <h3>Information Collection and Use</h3>
-                <p>This extension does not collect, store, or transmit any personal information.</p>
-                
-                <h3>Data Storage</h3>
-                <p>All data is stored locally on your device. No information is sent to external servers.</p>
-                
-                <h3>Third-Party Services</h3>
-                <p>This extension does not use any third-party services or analytics.</p>
-                
-                <h3>Changes to This Policy</h3>
-                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
-                
-                <h3>Contact Us</h3>
-                <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:therealfontdetector@gmail.com">therealfontdetector@gmail.com</a>.</p>
+                <h2>Your Privacy, Our Priority</h2>
+                <p>At Font Detector, we're committed to protecting your privacy. Our extension operates with complete transparency:</p>
+                <ul>
+                    <li>Zero data collection or transmission</li>
+                    <li>All operations performed locally on your device</li>
+                    <li>No third-party services or analytics used</li>
+                </ul>
+                <p>For any inquiries about our privacy practices, reach out to us at <a href="mailto:therealfontdetector@gmail.com">therealfontdetector@gmail.com</a>.</p>
             </section>
-        </main>
-    </div>
+        </div>
+    </main>
     
     <footer>
-        <p>&copy; 2024 Font Detector Extension. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2024 Font Detector Extension. Empowering web typography enthusiasts worldwide.</p>
+        </div>
     </footer>
 </body>
 </html>
