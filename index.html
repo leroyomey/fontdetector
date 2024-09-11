@@ -5,28 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Font Detector Extension</title>
     <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f5f5;
+            --text-color: #333;
+            --light-text: #666;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+        .container {
             max-width: 800px;
             margin: 0 auto;
-            color: #333;
+            padding: 20px;
         }
-        h1, h2 { color: #2c3e50; }
-        .feature-list { padding-left: 20px; }
-        footer { 
-            margin-top: 40px;
+        header {
+            background-color: var(--primary-color);
+            color: white;
             text-align: center;
-            font-size: 0.8em;
-            color: #7f8c8d;
+            padding: 2rem 0;
+        }
+        h1 { margin: 0; font-size: 2.5rem; }
+        h2 { color: var(--primary-color); margin-top: 2rem; }
+        .feature-list { padding-left: 20px; }
+        .feature-list li { margin-bottom: 0.5rem; }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
         }
         .privacy-policy {
-            background-color: #f8f9fa;
+            background-color: var(--secondary-color);
             padding: 20px;
             border-radius: 5px;
-            margin-top: 30px;
+            margin-top: 2rem;
+        }
+        footer { 
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -35,55 +64,52 @@
         <h1>Font Detector Extension</h1>
     </header>
     
-    <main>
-        <section>
-            <p>Font Detector is a powerful and user-friendly browser extension that helps web designers, developers, and typography enthusiasts identify fonts used on any webpage.</p>
-        </section>
-        
-        <section>
-            <h2>Key Features</h2>
-            <ul class="feature-list">
-                <li>Instantly detects and lists fonts used on any webpage.</li>
-                <li>Clean, intuitive interface with dark and light themes.</li>
-                <li>One-click search functionality to find and download detected fonts.</li>
-                <li>Easy copy-to-clipboard option for font names.</li>
-                <li>Pagination for better organization of large font lists.</li>
-                <li>CORS restriction warnings for comprehensive font detection.</li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>Why Choose Font Detector?</h2>
-            <p>Whether you're looking to recreate a website's typography, find inspiration for your next design project, or simply satisfy your curiosity about web fonts, Font Detector is an essential tool for your browser.</p>
-        </section>
-        
-        <section>
-            <h2>Download</h2>
-            <p>Get Font Detector for your browser:</p>
-            <!-- Add download links here -->
-        </section>
-        
-        <section class="privacy-policy">
-            <h2>Privacy Policy</h2>
-            <h3>Information Collection and Use</h3>
-            <p>This extension does not collect, store, or transmit any personal information.</p>
+    <div class="container">
+        <main>
+            <section>
+                <p>Font Detector is a powerful and user-friendly browser extension that helps web designers, developers, and typography enthusiasts identify fonts used on any webpage.</p>
+            </section>
             
-            <h3>Data Storage</h3>
-            <p>All data is stored locally on your device. No information is sent to external servers.</p>
+            <section>
+                <h2>Key Features</h2>
+                <ul class="feature-list">
+                    <li>Instantly detects and lists fonts used on any webpage.</li>
+                    <li>Clean, intuitive interface with dark and light themes.</li>
+                    <li>One-click search functionality to find and download detected fonts.</li>
+                    <li>Easy copy-to-clipboard option for font names.</li>
+                    <li>Pagination for better organization of large font lists.</li>
+                    <li>CORS restriction warnings for comprehensive font detection.</li>
+                </ul>
+            </section>
             
-            <h3>Third-Party Services</h3>
-            <p>This extension does not use any third-party services or analytics.</p>
+            <section>
+                <h2>Why Choose Font Detector?</h2>
+                <p>Whether you're looking to recreate a website's typography, find inspiration for your next design project, or simply satisfy your curiosity about web fonts, Font Detector is an essential tool for your browser.</p>
+                <a href="#" class="cta-button">Download Now</a>
+            </section>
             
-            <h3>Changes to This Policy</h3>
-            <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and any other page that is required.</p>
-            
-            <h3>Contact Us</h3>
-            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:therealfontdetector@gmail.com">therealfontdetector@gmail.com</a>.</p>
-        </section>
-    </main>
+            <section class="privacy-policy">
+                <h2>Privacy Policy</h2>
+                <h3>Information Collection and Use</h3>
+                <p>This extension does not collect, store, or transmit any personal information.</p>
+                
+                <h3>Data Storage</h3>
+                <p>All data is stored locally on your device. No information is sent to external servers.</p>
+                
+                <h3>Third-Party Services</h3>
+                <p>This extension does not use any third-party services or analytics.</p>
+                
+                <h3>Changes to This Policy</h3>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+                
+                <h3>Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:therealfontdetector@gmail.com">therealfontdetector@gmail.com</a>.</p>
+            </section>
+        </main>
+    </div>
     
     <footer>
-        <p>&copy; 2023 Font Detector Extension. All rights reserved.</p>
+        <p>&copy; 2024 Font Detector Extension. All rights reserved.</p>
     </footer>
 </body>
 </html>
