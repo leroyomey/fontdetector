@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Detector by Omey</title>
+    <title>Font Detector | Typography Unveiled</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -107,6 +107,16 @@
         .creator {
             color: var(--accent);
         }
+
+        .background-letter {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255,255,255,0.1);
+            transition: color 0.3s ease;
+            cursor: pointer;
+            z-index: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
@@ -114,9 +124,9 @@
         <div class="hero-content">
             <div class="top-content">
                 <h1 id="glitchText">Font Detector</h1>
-                <p>Unveil the hidden typography of the web with ease.</p>
+                <p>Unveil the hidden typography of the web with unparalleled precision and ease.</p>
             </div>
-            <a href="#" class="cta-button">Coming Soon</a>
+            <a href="#" class="cta-button">Get Extension</a>
         </div>
     </header>
 
@@ -175,7 +185,7 @@
         for (let i = 0; i < gridSize * gridSize; i++) {
             const char = document.createElement('div');
             char.textContent = chars[Math.floor(Math.random() * chars.length)];
-            char.style.position = 'absolute';
+            char.classList.add('background-letter');
             
             let x, y;
             do {
@@ -188,9 +198,6 @@
             char.style.left = `${x * cellWidth + Math.random() * (cellWidth / 2)}%`;
             char.style.top = `${y * cellHeight + Math.random() * (cellHeight / 2)}%`;
             char.style.fontSize = `${Math.random() * 20 + 10}px`;
-            char.style.color = 'rgba(255,255,255,0.1)';
-            char.style.transition = 'color 0.3s ease';
-            char.style.cursor = 'pointer';
 
             char.addEventListener('mouseover', () => {
                 char.style.color = getRandomColor();
