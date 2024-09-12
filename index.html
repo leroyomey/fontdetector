@@ -111,11 +111,9 @@
         .background-letter {
             position: absolute;
             font-size: 20px;
-            color: rgba(255,255,255,0.1);
-            transition: color 0.3s ease;
-            cursor: pointer;
             z-index: 1;
-            pointer-events: auto;
+            pointer-events: none;
+            transition: color 0.5s ease;
         }
     </style>
 </head>
@@ -171,44 +169,42 @@
         // Floating characters in background
         const header = document.querySelector('header');
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-
-        const gridSize = 10; // 10x10 grid
-        const cellWidth = 100 / gridSize;
-        const cellHeight = 100 / gridSize;
-
-        const usedPositions = new Set();
+        const numLetters = 10;
+        let backgroundLetters = [];
 
         function getRandomColor() {
             return `hsl(${Math.random() * 360}, 100%, 50%)`;
         }
 
-        for (let i = 0; i < gridSize * gridSize; i++) {
+        function createLetter() {
             const char = document.createElement('div');
             char.textContent = chars[Math.floor(Math.random() * chars.length)];
             char.classList.add('background-letter');
-            
-            let x, y;
-            do {
-                x = Math.floor(Math.random() * gridSize);
-                y = Math.floor(Math.random() * gridSize);
-            } while (usedPositions.has(`${x},${y}`));
-
-            usedPositions.add(`${x},${y}`);
-
-            char.style.left = `${x * cellWidth + Math.random() * (cellWidth / 2)}%`;
-            char.style.top = `${y * cellHeight + Math.random() * (cellHeight / 2)}%`;
+            char.style.left = `${Math.random() * 100}%`;
+            char.style.top = `${Math.random() * 100}%`;
             char.style.fontSize = `${Math.random() * 20 + 10}px`;
-
-            char.addEventListener('mouseover', () => {
-                char.style.color = getRandomColor();
-            });
-
-            char.addEventListener('mouseout', () => {
-                char.style.color = 'rgba(255,255,255,0.1)';
-            });
-
-            header.appendChild(char);
+            char.style.color = getRandomColor();
+            return char;
         }
+
+        function updateLetters() {
+            // Remove old letters
+            backgroundLetters.forEach(letter => header.removeChild(letter));
+            backgroundLetters = [];
+
+            // Create new letters
+            for (let i = 0; i < numLetters; i++) {
+                const letter = createLetter();
+                backgroundLetters.push(letter);
+                header.appendChild(letter);
+            }
+        }
+
+        // Initial creation
+        updateLetters();
+
+        // Update every 3 seconds
+        setInterval(updateLetters, 3000);
     </script>
 </body>
 </html>
