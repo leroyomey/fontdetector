@@ -71,14 +71,17 @@
         }
         footer {
             margin-top: auto;
-            padding: 2rem 0;
+            padding: 1rem 0;
             text-align: center;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .creator {
-            margin-top: 0.5rem;
-            font-weight: 600;
             color: var(--accent);
         }
     </style>
@@ -94,8 +97,10 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Font Detector. Decoding the web, one character at a time.</p>
-            <p class="creator">Created by: Omey</p>
+            <div class="footer-content">
+                <span>&copy; 2024 Font Detector</span>
+                <span class="creator">Created by: Omey</span>
+            </div>
         </div>
     </footer>
 
