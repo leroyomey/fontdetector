@@ -87,6 +87,14 @@
             height: 100%;
             z-index: 0;
         }
+        .container a[href^="mailto"] {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .container a[href^="mailto"]:hover {
+            color: var(--secondary);
+        }
     </style>
 </head>
 <body>
@@ -96,7 +104,7 @@
         <h1>Font Detector</h1>
         <p>Unveil the hidden typography of the web with ease.</p>
         <a href="#" class="cta-button">Coming Soon</a>
-        <p>therealfontdetector@gmail.com</p>
+        <p><a href="mailto:therealfontdetector@gmail.com">therealfontdetector@gmail.com</a></p>
         <footer>
             <p>&copy; 2024 Font Detector | Created by <span class="creator">Omey</span></p>
         </footer>
