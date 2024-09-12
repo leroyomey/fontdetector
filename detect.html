@@ -375,3 +375,13 @@
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 console.log('Font copied to clipboard');
+            });
+        }
+
+        document.getElementById('detect-fonts').addEventListener('click', async () => {
+            const urlInput = document.getElementById('url-input');
+            const url = urlInput.value.trim();
+            if (!url) {
+                displayErrorMessage("Please enter a valid URL.");
+                return;
+            }
