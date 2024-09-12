@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Detector</title>
+    <title>Font Detector by Omey</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -20,7 +20,6 @@
             background-color: var(--bg);
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
@@ -31,17 +30,19 @@
             padding: 2rem;
             position: relative;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 80vh; 
         }
         h1 {
             font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
             color: var(--accent);
         }
         p {
             font-size: 1.2rem;
             font-weight: 300;
-            margin-bottom: 2rem;
         }
         .cta-button {
             display: inline-block;
@@ -53,6 +54,7 @@
             border-radius: 50px;
             transition: all 0.3s ease;
             font-size: 1rem;
+            align-self: center; 
         }
         .cta-button:hover {
             background-color: #4c51bf;
@@ -60,12 +62,9 @@
             box-shadow: 0 4px 6px rgba(90, 103, 216, 0.2);
         }
         footer {
-            margin-top: 2rem;
             font-size: 0.9rem;
             color: var(--text);
             opacity: 0.7;
-            position: relative;
-            z-index: 1;
         }
         .creator {
             color: var(--accent);
@@ -88,11 +87,10 @@
         <h1>Font Detector</h1>
         <p>Unveil the hidden typography of the web with ease.</p>
         <a href="#" class="cta-button">Coming Soon</a>
+        <footer>
+            <p>&copy; 2024 Font Detector | Created by <span class="creator">Omey</span></p>
+        </footer>
     </div>
-
-    <footer>
-        <p>&copy; 2024 Font Detector | Created by <span class="creator">Omey</span></p>
-    </footer>
 
     <script>
         const svg = document.getElementById('background');
