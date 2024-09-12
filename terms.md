@@ -18,4 +18,4 @@
 ### Contact
 - Questions? Email us at therealfontdetector@gmail.com.
 
-    Last updated: 9/12/2024
+        Last updated: 9/12/2024
