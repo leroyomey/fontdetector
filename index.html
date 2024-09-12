@@ -32,7 +32,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             position: relative;
             overflow: hidden;
@@ -41,7 +41,7 @@
         .hero-content {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             height: 100%;
             width: 100%;
@@ -53,6 +53,7 @@
             flex-direction: column;
             align-items: center;
             gap: 1rem;
+            margin-bottom: 2rem;
         }
         h1 {
             font-size: 6rem;
@@ -84,7 +85,7 @@
         }
         .cta-button:hover {
             background-color: #4f46e5;
-            transform: translateY(-3px);
+            transform: translate(-50%, -50%) translateY(-3px);
             box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
         footer {
@@ -161,15 +162,44 @@
         const header = document.querySelector('header');
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
 
-        for (let i = 0; i < 100; i++) {
+        const gridSize = 10; // 10x10 grid
+        const cellWidth = 100 / gridSize;
+        const cellHeight = 100 / gridSize;
+
+        const usedPositions = new Set();
+
+        function getRandomColor() {
+            return `hsl(${Math.random() * 360}, 100%, 50%)`;
+        }
+
+        for (let i = 0; i < gridSize * gridSize; i++) {
             const char = document.createElement('div');
             char.textContent = chars[Math.floor(Math.random() * chars.length)];
             char.style.position = 'absolute';
-            char.style.left = `${Math.random() * 100}%`;
-            char.style.top = `${Math.random() * 100}%`;
+            
+            let x, y;
+            do {
+                x = Math.floor(Math.random() * gridSize);
+                y = Math.floor(Math.random() * gridSize);
+            } while (usedPositions.has(`${x},${y}`));
+
+            usedPositions.add(`${x},${y}`);
+
+            char.style.left = `${x * cellWidth + Math.random() * (cellWidth / 2)}%`;
+            char.style.top = `${y * cellHeight + Math.random() * (cellHeight / 2)}%`;
             char.style.fontSize = `${Math.random() * 20 + 10}px`;
             char.style.color = 'rgba(255,255,255,0.1)';
-            char.style.pointerEvents = 'none';
+            char.style.transition = 'color 0.3s ease';
+            char.style.cursor = 'pointer';
+
+            char.addEventListener('mouseover', () => {
+                char.style.color = getRandomColor();
+            });
+
+            char.addEventListener('mouseout', () => {
+                char.style.color = 'rgba(255,255,255,0.1)';
+            });
+
             header.appendChild(char);
         }
     </script>
