@@ -104,10 +104,30 @@
         .container a[href^="mailto"]:hover {
             color: var(--secondary);
         }
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .home-button:hover {
+            background-color: #4c51bf;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(90, 103, 216, 0.2);
+        }
     </style>
 </head>
 <body>
     <svg id="background"></svg>
+    
+    <a href="index.html" class="home-button">Home</a>
     
     <div class="container">
         <h1>Font Detector</h1>
