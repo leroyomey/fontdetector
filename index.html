@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FontDetect | Simplicity Meets Innovation</title>
+    <title>FontDetect | Typography Unveiled</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #ffffff;
-            --text: #333333;
+            --bg: #000000;
+            --text: #ffffff;
             --accent: #6366f1;
             --secondary: #10b981;
         }
@@ -18,73 +18,63 @@
             line-height: 1.6;
             color: var(--text);
             background-color: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .container { 
-            max-width: 800px; 
+            max-width: 1200px; 
             margin: 0 auto; 
             padding: 0 2rem;
         }
         header {
             height: 100vh;
-            background-color: #000000;
-            color: #ffffff;
-            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            overflow: hidden;
         }
         .hero-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             text-align: center;
             z-index: 2;
         }
         h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 6rem;
+            margin-bottom: 2rem;
             font-weight: 700;
+            letter-spacing: -0.05em;
+        }
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .cta-button {
             display: inline-block;
             background: var(--accent);
-            color: #ffffff;
-            padding: 0.8rem 2rem;
+            color: var(--text);
+            padding: 1rem 3rem;
             text-decoration: none;
             font-weight: 600;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
         }
         .cta-button:hover {
             background-color: #4f46e5;
-        }
-        section {
-            padding: 4rem 0;
-        }
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-        .feature-list {
-            list-style-type: none;
-        }
-        .feature-list li {
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        .feature-list li::before {
-            content: '•';
-            color: var(--secondary);
-            position: absolute;
-            left: 0;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
         footer {
-            background-color: #f3f4f6;
+            margin-top: auto;
             padding: 2rem 0;
             text-align: center;
             font-size: 0.9rem;
-            color: #6b7280;
+            color: rgba(255, 255, 255, 0.6);
         }
     </style>
 </head>
@@ -92,35 +82,14 @@
     <header>
         <div class="hero-content">
             <h1 id="glitchText">FontDetect</h1>
-            <p>Unveil the typography of the web</p>
+            <p>Unveil the hidden typography of the web with unparalleled precision and ease.</p>
             <a href="#" class="cta-button">Get Extension</a>
         </div>
     </header>
 
-    <main>
-        <section>
-            <div class="container">
-                <h2>Features</h2>
-                <ul class="feature-list">
-                    <li>Instant font recognition</li>
-                    <li>Detailed style analysis</li>
-                    <li>Font pairing suggestions</li>
-                    <li>Cross-browser compatibility</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <div class="container">
-                <h2>How It Works</h2>
-                <p>FontDetect uses advanced algorithms to analyze web pages and identify fonts in real-time. Simply hover over any text to reveal its typographic details.</p>
-            </div>
-        </section>
-    </main>
-
     <footer>
         <div class="container">
-            <p>&copy; 2024 FontDetect. Simplifying typography exploration.</p>
+            <p>&copy; 2024 FontDetect. Decoding the web, one character at a time.</p>
         </div>
     </footer>
 
@@ -153,18 +122,18 @@
         glitchText.addEventListener('mouseover', glitch);
         glitchText.dataset.value = glitchText.innerText;
 
-        // Floating characters in header
+        // Floating characters in background
         const header = document.querySelector('header');
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
 
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 100; i++) {
             const char = document.createElement('div');
             char.textContent = chars[Math.floor(Math.random() * chars.length)];
             char.style.position = 'absolute';
             char.style.left = `${Math.random() * 100}%`;
             char.style.top = `${Math.random() * 100}%`;
             char.style.fontSize = `${Math.random() * 20 + 10}px`;
-            char.style.color = 'rgba(255,255,255,0.2)';
+            char.style.color = 'rgba(255,255,255,0.1)';
             char.style.pointerEvents = 'none';
             header.appendChild(char);
         }
