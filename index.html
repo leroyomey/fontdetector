@@ -3,319 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FontDetect | Typography Reimagined</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Playfair+Display:wght@700&family=Oswald:wght@500&family=Lora&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <title>FontDetect | Simplicity Meets Innovation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #000000;
-            --text: #ffffff;
-            --accent: #ff00ff;
-            --secondary: #00ffff;
+            --bg: #ffffff;
+            --text: #333333;
+            --accent: #6366f1;
+            --secondary: #10b981;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;
-            cursor: none;
-        }
-        #custom-cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: var(--accent);
-            mix-blend-mode: difference;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
+            color: var(--text);
+            background-color: var(--bg);
         }
         .container { 
-            max-width: 1400px; 
+            max-width: 800px; 
             margin: 0 auto; 
             padding: 0 2rem;
         }
         header {
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--text);
-            mix-blend-mode: difference;
-        }
-        .hero {
             height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            background-color: #000000;
+            color: #ffffff;
             overflow: hidden;
+            position: relative;
         }
         .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
             z-index: 2;
-            mix-blend-mode: difference;
         }
         h1 {
-            font-size: 8vw;
+            font-size: 4rem;
             margin-bottom: 1rem;
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            position: relative;
-            display: inline-block;
-        }
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+            font-weight: 700;
         }
         .cta-button {
             display: inline-block;
             background: var(--accent);
-            color: var(--bg);
+            color: #ffffff;
             padding: 0.8rem 2rem;
             text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: all 0.5s;
+        .cta-button:hover {
+            background-color: #4f46e5;
         }
-        .cta-button:hover::before {
-            left: 100%;
+        section {
+            padding: 4rem 0;
         }
-        .font-playground {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        .floating-char {
-            position: absolute;
+        h2 {
             font-size: 2rem;
-            opacity: 0.5;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 5rem 0;
-        }
-        .feature-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--accent), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .feature-card:hover::before {
-            opacity: 0.1;
-        }
-        .feature-icon {
-            font-size: 3rem;
             margin-bottom: 1rem;
+            color: var(--accent);
         }
-        .demo-section {
-            position: relative;
-            padding: 5rem 0;
-            overflow: hidden;
+        .feature-list {
+            list-style-type: none;
         }
-        .demo-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .demo-text {
-            flex: 1;
-            padding-right: 2rem;
-        }
-        .demo-image {
-            flex: 1;
+        .feature-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
             position: relative;
         }
-        .demo-image img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 10px 10px 0 var(--accent);
-            transition: all 0.3s ease;
-        }
-        .demo-image:hover img {
-            transform: translate(-5px, -5px);
-            box-shadow: 15px 15px 0 var(--secondary);
+        .feature-list li::before {
+            content: '•';
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
         }
         footer {
-            background: var(--accent);
-            color: var(--bg);
+            background-color: #f3f4f6;
             padding: 2rem 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(0,0,0,0.1) 10px,
-                rgba(0,0,0,0.1) 20px
-            );
-        }
-        @media (max-width: 768px) {
-            .features { grid-template-columns: 1fr; }
-            .demo-content { flex-direction: column; }
-            .demo-text, .demo-image { padding: 1rem 0; }
+            font-size: 0.9rem;
+            color: #6b7280;
         }
     </style>
 </head>
 <body>
-    <div id="custom-cursor"></div>
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">FontDetect</div>
-                <a href="#" class="cta-button">Get Extension</a>
-            </nav>
+        <div class="hero-content">
+            <h1 id="glitchText">FontDetect</h1>
+            <p>Unveil the typography of the web</p>
+            <a href="#" class="cta-button">Get Extension</a>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="font-playground" id="fontPlayground"></div>
+        <section>
             <div class="container">
-                <div class="hero-content">
-                    <h1 id="glitchText">Typography Unveiled</h1>
-                    <p>Decode the visual language of the web</p>
-                    <a href="#" class="cta-button">Explore Fonts</a>
-                </div>
+                <h2>Features</h2>
+                <ul class="feature-list">
+                    <li>Instant font recognition</li>
+                    <li>Detailed style analysis</li>
+                    <li>Font pairing suggestions</li>
+                    <li>Cross-browser compatibility</li>
+                </ul>
             </div>
         </section>
 
-        <section class="features">
+        <section>
             <div class="container">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Instant Recognition</h3>
-                    <p>Identify fonts in milliseconds with our AI-powered engine.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Style Analysis</h3>
-                    <p>Get detailed insights on font styles, weights, and pairings.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Deep Inspection</h3>
-                    <p>Explore font metrics, licensing info, and usage statistics.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="demo-section">
-            <div class="container demo-content">
-                <div class="demo-text">
-                    <h2>Experience the Magic</h2>
-                    <p>See Font Detector in action. Hover over any text to reveal its typographic secrets.</p>
-                </div>
-                <div class="demo-image">
-                    <img src="demo-screenshot.jpg" alt="Font Detector Demo">
-                </div>
+                <h2>How It Works</h2>
+                <p>FontDetect uses advanced algorithms to analyze web pages and identify fonts in real-time. Simply hover over any text to reveal its typographic details.</p>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 FontDetect. Decoding the web, one character at a time.</p>
+            <p>&copy; 2024 FontDetect. Simplifying typography exploration.</p>
         </div>
     </footer>
 
     <script>
-        // Custom cursor
-        const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        // Floating characters
-        const fontPlayground = document.getElementById('fontPlayground');
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-        const fonts = ['Roboto Mono', 'Playfair Display', 'Oswald', 'Lora', 'Montserrat'];
-
-        for (let i = 0; i < 100; i++) {
-            const char = document.createElement('div');
-            char.classList.add('floating-char');
-            char.textContent = chars[Math.floor(Math.random() * chars.length)];
-            char.style.left = `${Math.random() * 100}%`;
-            char.style.top = `${Math.random() * 100}%`;
-            char.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
-            fontPlayground.appendChild(char);
-        }
-
-        // Magnetic effect on floating characters
-        document.addEventListener('mousemove', (e) => {
-            const chars = document.querySelectorAll('.floating-char');
-            chars.forEach(char => {
-                const rect = char.getBoundingClientRect();
-                const charX = rect.left + rect.width / 2;
-                const charY = rect.top + rect.height / 2;
-                const distX = e.clientX - charX;
-                const distY = e.clientY - charY;
-                const distance = Math.sqrt(distX * distX + distY * distY);
-                if (distance < 100) {
-                    const angle = Math.atan2(distY, distX);
-                    const force = (100 - distance) / 10;
-                    char.style.transform = `translate(${Math.cos(angle) * force}px, ${Math.sin(angle) * force}px)`;
-                } else {
-                    char.style.transform = 'translate(0, 0)';
-                }
-            });
-        });
-
         // Glitch effect on hero text
         const glitchText = document.getElementById('glitchText');
         const glitchChars = '!<>-_\\/[]{}—=+*^?#________';
@@ -344,17 +153,21 @@
         glitchText.addEventListener('mouseover', glitch);
         glitchText.dataset.value = glitchText.innerText;
 
-        // Interactive feature cards
-        const featureCards = document.querySelectorAll('.feature-card');
-        featureCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            });
-        });
+        // Floating characters in header
+        const header = document.querySelector('header');
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+
+        for (let i = 0; i < 50; i++) {
+            const char = document.createElement('div');
+            char.textContent = chars[Math.floor(Math.random() * chars.length)];
+            char.style.position = 'absolute';
+            char.style.left = `${Math.random() * 100}%`;
+            char.style.top = `${Math.random() * 100}%`;
+            char.style.fontSize = `${Math.random() * 20 + 10}px`;
+            char.style.color = 'rgba(255,255,255,0.2)';
+            char.style.pointerEvents = 'none';
+            header.appendChild(char);
+        }
     </script>
 </body>
 </html>
