@@ -192,6 +192,45 @@
         body.dark #detect-fonts:hover {
             background-color: #3793d5;
         }
+        
+        #font-preview {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        #font-preview.dark {
+            background-color: #2a2a2a;
+        }
+
+        #font-filter {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        body.dark #font-filter {
+            background-color: #444;
+            color: #f8f9fa;
+            border-color: #666;
+        }
+
+        #export-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #export-btn:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
@@ -213,6 +252,7 @@
         <input type="text" id="url-input" placeholder="Enter URL">
         <button id="detect-fonts">Detect Fonts</button>
     </div>
+    <input type="text" id="font-filter" placeholder="Filter fonts...">
     <div id="content-wrapper">
         <div id="loadingContainer" style="display: none;">
             <p>Detecting fonts...</p>
@@ -220,6 +260,8 @@
         <ul id="fontList"></ul>
     </div>
     <div id="pagination"></div>
+    <div id="font-preview"></div>
+    <button id="export-btn">Export Fonts</button>
 
     <script>
         const genericFonts = new Set([
@@ -244,7 +286,13 @@
                 normalized2.includes(normalized1);
         }
 
+        let fontCache = {};
+
         async function detectFonts(url) {
+            if (fontCache[url]) {
+                return fontCache[url];
+            }
+
             try {
                 const response = await fetch(url);
                 const html = await response.text();
@@ -291,10 +339,13 @@
                     self.findIndex(f => isSimilarFont(f, font)) === index
                 );
 
-                return {
+                const result = {
                     fonts: uniqueFonts,
                     corsRestrictedStylesheets: corsRestrictedStylesheets.length
                 };
+
+                fontCache[url] = result;
+                return result;
             } catch (error) {
                 console.error("Error fetching or parsing URL:", error);
                 throw error;
@@ -337,51 +388,123 @@
 
                 fontList.appendChild(corsWarning);
             }
+
+            updateFontPreview(response.fonts[0]);
         }
+          function createFontItem(font) {
+              const li = document.createElement('li');
+              li.className = 'font-item';
+              li.textContent = font;
 
-        function createFontItem(font) {
-            const li = document.createElement('li');
-            li.className = 'font-item';
-            li.textContent = font;
+              const buttonContainer = document.createElement('div');
 
-            const buttonContainer = document.createElement('div');
-            buttonContainer.className = 'button-container';
+              function copyToClipboard(text) {
+                  navigator.clipboard.writeText(text).then(() => {
+                      console.log('Font copied to clipboard');
+                      // You can add a visual feedback here, like a temporary tooltip
+                      const tooltip = document.createElement('div');
+                      tooltip.textContent = 'Copied!';
+                      tooltip.style.position = 'fixed';
+                      tooltip.style.top = '50%';
+                      tooltip.style.left = '50%';
+                      tooltip.style.transform = 'translate(-50%, -50%)';
+                      tooltip.style.padding = '10px';
+                      tooltip.style.backgroundColor = 'rgba(0,0,0,0.7)';
+                      tooltip.style.color = 'white';
+                      tooltip.style.borderRadius = '5px';
+                      document.body.appendChild(tooltip);
+                      setTimeout(() => tooltip.remove(), 2000);
+                  });
+              }
 
-            const searchButton = document.createElement('button');
-            searchButton.className = 'icon-button search';
-            searchButton.innerHTML = '<img src="search.svg" alt="Search" width="20" height="20">';
-            searchButton.title = 'Search for this font online';
-            searchButton.addEventListener('click', () => searchFont(font));
+              function displayErrorMessage(message) {
+                  const fontList = document.getElementById('fontList');
+                  fontList.innerHTML = '';
 
-            const copyButton = document.createElement('button');
-            copyButton.className = 'icon-button copy';
-            copyButton.innerHTML = '<img src="copy.svg" alt="Copy" width="20" height="20">';
-            copyButton.title = 'Copy font name to clipboard';
-            copyButton.addEventListener('click', () => copyToClipboard(font));
+                  const errorContainer = document.createElement('div');
+                  errorContainer.style.textAlign = 'center';
+                  errorContainer.style.marginTop = '20px';
 
-            buttonContainer.appendChild(searchButton);
-            buttonContainer.appendChild(copyButton);
-            li.appendChild(buttonContainer);
+                  const errorMessage = document.createElement('p');
+                  errorMessage.textContent = message;
+                  errorMessage.style.color = 'red';
+                  errorMessage.style.fontWeight = 'bold';
+                  errorMessage.style.marginBottom = '10px';
 
-            return li;
-        }
+                  const additionalMessage = document.createElement('p');
+                  additionalMessage.textContent = "Try reloading the webpage. If this problem continues, it's likely that some fonts cannot be detected on this webpage.";
+                  additionalMessage.style.color = 'red';
+                  additionalMessage.style.fontWeight = 'bold';
 
-        function searchFont(font) {
-            const searchQuery = encodeURIComponent(`${font} font download`);
-            const searchUrl = `https://www.google.com/search?q=${searchQuery}`;
-            window.open(searchUrl, '_blank');
-        }
+                  errorContainer.appendChild(errorMessage);
+                  errorContainer.appendChild(additionalMessage);
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                console.log('Font copied to clipboard');
-            });
-        }
+                  fontList.appendChild(errorContainer);
+              }
 
-        document.getElementById('detect-fonts').addEventListener('click', async () => {
-            const urlInput = document.getElementById('url-input');
-            const url = urlInput.value.trim();
-            if (!url) {
-                displayErrorMessage("Please enter a valid URL.");
-                return;
-            }
+              function updatePagination(totalFonts) {
+                  const paginationDiv = document.getElementById('pagination');
+                  paginationDiv.innerHTML = '';
+                  const totalPages = Math.ceil(totalFonts / FONTS_PER_PAGE);
+
+                  for (let i = 1; i <= totalPages; i++) {
+                      const pageLink = document.createElement('a');
+                      pageLink.href = '#';
+                      pageLink.textContent = i;
+                      if (i === currentPage) {
+                          pageLink.classList.add('current-page');
+                      }
+                      pageLink.addEventListener('click', (e) => {
+                          e.preventDefault();
+                          currentPage = i;
+                          displayFonts(allFonts);
+                      });
+                      paginationDiv.appendChild(pageLink);
+                  }
+              }
+
+              function setTheme(theme) {
+                  document.body.className = theme;
+                  localStorage.setItem('theme', theme);
+                  // Update font preview background
+                  const fontPreview = document.getElementById('font-preview');
+                  if (fontPreview) {
+                      fontPreview.className = theme === 'dark' ? 'dark' : '';
+                  }
+              }
+
+              function loadTheme() {
+                  const theme = localStorage.getItem('theme') || 'light';
+                  setTheme(theme);
+              }
+
+              // Add event listeners for theme toggle buttons
+              document.getElementById('light-theme').addEventListener('click', () => setTheme('light'));
+              document.getElementById('dark-theme').addEventListener('click', () => setTheme('dark'));
+
+              // Initialize theme
+              loadTheme();
+
+              // Add event listener for font detection
+              document.getElementById('detect-fonts').addEventListener('click', async () => {
+                  const urlInput = document.getElementById('url-input');
+                  const url = urlInput.value.trim();
+                  if (!url) {
+                      displayErrorMessage("Please enter a valid URL.");
+                      return;
+                  }
+
+                  document.getElementById('loadingContainer').style.display = 'flex';
+                  try {
+                      const response = await detectFonts(url);
+                      allFonts = response;
+                      currentPage = 1;
+                      displayFonts(allFonts);
+                  } catch (error) {
+                      console.error("Error detecting fonts:", error);
+                      displayErrorMessage("An error occurred while detecting fonts. Please try again.");
+                  } finally {
+                      document.getElementById('loadingContainer').style.display = 'none';
+                  }
+              });
+              // Add event listener for font detection  
