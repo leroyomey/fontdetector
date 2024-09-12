@@ -31,19 +31,28 @@
         header {
             height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
             position: relative;
             overflow: hidden;
+            padding: 2rem 0;
         }
         .hero-content {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            height: 35vh; /* Adjust this value to control the overall spacing */
+            height: 100%;
+            width: 100%;
             text-align: center;
             z-index: 2;
+        }
+        .top-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
         h1 {
             font-size: 6rem;
@@ -98,8 +107,10 @@
 <body>
     <header>
         <div class="hero-content">
-            <h1 id="glitchText">Font Detector</h1>
-            <p>Unveil the hidden typography of the web with unparalleled precision and ease.</p>
+            <div class="top-content">
+                <h1 id="glitchText">Font Detector</h1>
+                <p>Unveil the hidden typography of the web with unparalleled precision and ease.</p>
+            </div>
             <a href="#" class="cta-button">Get Extension</a>
         </div>
     </header>
