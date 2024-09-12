@@ -125,12 +125,38 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(90, 103, 216, 0.2);
         }
+        .privacy-link {
+            font-size: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .privacy-link a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .privacy-link a:hover {
+            color: var(--accent);
+        }
+        .pagination {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
     <svg id="background"></svg>
     
     <a href="index.html" class="home-button">Home</a>
+    <div class="pagination">Page 2 of 2</div>
     
     <div class="container">
         <h1>Privacy Policy</h1>
@@ -155,6 +181,10 @@
 
             <p class="last-updated"><strong>Last updated: 9/10/2024</strong></p>
         </div>
+    </div>
+
+    <div class="privacy-link">
+        <a href="privacy.html">Privacy Policy</a>
     </div>
 
     <footer>
