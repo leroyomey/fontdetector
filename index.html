@@ -107,7 +107,8 @@
         .home-button {
             position: fixed;
             top: 20px;
-            left: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             background-color: var(--accent);
             color: white;
             padding: 10px 20px;
@@ -119,7 +120,7 @@
         }
         .home-button:hover {
             background-color: #4c51bf;
-            transform: translateY(-2px);
+            transform: translateX(-50%) translateY(-2px);
             box-shadow: 0 4px 6px rgba(90, 103, 216, 0.2);
         }
         .privacy-link {
@@ -135,25 +136,12 @@
         .privacy-link a:hover {
             color: var(--accent);
         }
-        .pagination {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            background-color: var(--accent);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body>
     <svg id="background"></svg>
     
     <a href="index.html" class="home-button">Home</a>
-    <div class="pagination">Page 1 of 2</div>
     
     <div class="container">
         <h1>Font Detector</h1>
