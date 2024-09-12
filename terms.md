@@ -1,4 +1,4 @@
-# Terms of Service
+# Terms of Use
 
 ### Acceptance
 - By using this extension, you agree to these terms.
