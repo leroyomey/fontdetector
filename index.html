@@ -123,7 +123,7 @@
         for (let i = 0; i < numCircles; i++) {
             const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             circle.setAttribute('r', Math.random() * 5 + 2);
-            circle.setAttribute('fill', `rgba(90, 103, 216, ${Math.random() * 0.2})`);
+            circle.setAttribute('fill', `rgba(90, 103, 216, ${Math.random() * 0.5 + 0.1})`);
             circle.setAttribute('cx', Math.random() * width);
             circle.setAttribute('cy', Math.random() * height);
             svg.appendChild(circle);
