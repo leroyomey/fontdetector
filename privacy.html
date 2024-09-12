@@ -139,6 +139,14 @@
         .privacy-link a:hover {
             color: var(--accent);
         }
+        .container a[href^="mailto"] {
+            color: var(--accent); /* Updated color to match index.html */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .container a[href^="mailto"]:hover {
+            color: var(--secondary);
+        }
     </style>
 </head>
 <body>
