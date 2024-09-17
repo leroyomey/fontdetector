@@ -14,7 +14,6 @@
             --bg: #f0f4f8;
             --text: #2d3748;
             --accent: #5a67d8;
-            --secondary: #38b2ac;
         }
 
         * {
@@ -36,152 +35,53 @@
 
         .container {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
+            padding: 2rem;
             text-align: center;
             max-width: 600px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .policy-section {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .creator a:hover {
-            color: #38b2ac;
-            transition: color 0.3s ease;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        h3 {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-            text-align: left;
         }
 
         p {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            text-align: left;
-        }
-
-        .last-updated {
-            font-size: 0.8rem;
-            color: var(--text);
-            opacity: 0.8;
-            margin-top: 2rem;
-        }
-
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 1rem 0;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.9rem;
-            color: var(--text);
-            opacity: 0.7;
-        }
-
-        .creator {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        #background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .last-updated-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 2rem;
-        }
-
-        .last-updated {
-            font-size: 0.8rem;
-            color: var(--text);
-            opacity: 0.8;
+            font-size: 1rem;
+            margin-bottom: 1rem;
         }
 
         .home-button {
-            display: inline-block;
             background: var(--accent);
             color: white;
             padding: 0.8rem 2rem;
-            text-decoration: none;
-            font-weight: 600;
             border-radius: 50px;
-            transition: all 0.3s ease;
             font-size: 1rem;
+            margin-top: 2rem;
+            display: inline-block;
+            text-decoration: none;
         }
 
         .home-button:hover {
             background-color: #4c51bf;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(90, 103, 216, 0.2);
         }
 
-        .privacy-link {
-            font-size: 14px;
-            /* Increased from 10px to 13px */
+        footer {
             text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .privacy-link a {
+            padding: 1rem 0;
+            font-size: 0.8rem;
             color: var(--text);
-            text-decoration: none;
-            transition: color 0.3s ease;
         }
 
-        .privacy-link a:hover {
-            color: var(--accent);
-        }
-
-        .container a[href^="mailto"] {
-            color: var(--accent);
-            /* Updated color to match index.html */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .container a[href^="mailto"]:hover {
-            color: var(--secondary);
+        @media only screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
